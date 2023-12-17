@@ -1,0 +1,15 @@
+\section{Algoritmo}
+
+Nesta seção, o algoritmo de \cite{Boatti2016AData} é adaptado ao modelo atual. Partindo do calculo da fração volumétrica vítrea atual $Z_g^i$ pela lei de evolução \eqref{eq:zg} pelo pseudocódigo do algoritmo \ref{alg:zg}, presente no apêndice \ref{pseudocodigo}.
+
+No início de cada iteração, o algoritmo \ref{alg:zg} determina $Z_g^i$ seguindo as equações de evolução \eqref{eq:zg}.
+Como existem duas equações para a fração de volume vítreo $Z_g$, uma faixa de valores iniciais é possível, pois depende da fabricação da peça.
+Para manter a compatibilidade com \cite{Boatti2016AData}, o valor inicial de $Z_g$ é definido como se o material tivesse sido aquecido à temperatura, ou seja, pela curva de aquecimento.
+Além disso, de acordo com a equação \eqref{eq:zg}, como discutido na seção \ref{fracVol}, a fração volumétrica só pode aumentar quando resfriando e diminuir quando aquecendo e não muda quando a temperatura é constante. Na implementação do algoritmo em \textit{ABAQUS}, foram consideradas pequenas tolerâncias para a determinação do fluxo de calor a fim de evitar problemas com o ruído numérico. 
+
+Com a fração de volume vítreo determinada, as propriedades constitutivas podem ser obtidas com as equações da seção \eqref{eqconstitutivas}, como mostrado no algoritmo \ref{alg:main} que também consta no apêndice \ref{pseudocodigo}.
+
+Primeiramente, os gradientes de deformação permanente e plástico-vítreo são mantidos constantes. Uma vez que a fase do material possa ser considerada totalmente emborrachada ($\theta_i > \theta_{rubbery}$), qualquer deformação plástica é regenerada e a deformação congelada pode evoluir com a equação \eqref{eq:ff}, e o gradiente de deformação plástico-vítreo pode ser igualado à identidade. Caso contrário, o último é constante a menos que o material esteja resfriando ou passando por uma deformação plástica maior, onde a $\textit{tol}_{pr}$ é definida como limiar, que é computado através do algoritmo de \textit{return mapping} da seção \eqref{retMapAlg}.
+
+O gradiente de deformação permanente pode aumentar somente quando a temperatura menor ou igual à temperatura vítrea $\theta_{glassy}$ durante o resfriamento (fixação da forma). Caso contrário, é constante. Com essas grandezas calculadas, os gradientes de deformação das fases emborrachada, elástico-vítrea e vítrea podem ser computado a partir das relações \eqref{eq:fr}, \eqref{eq:fr} e \eqref{eq:fg}, nessa ordem.
+Finalmente, a tensão Cauchy total é fornecida pela equação \eqref{eq:cauchy}.

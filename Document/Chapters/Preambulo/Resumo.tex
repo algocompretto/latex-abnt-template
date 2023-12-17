@@ -1,0 +1,37 @@
+\newpage
+\large
+\begin{center}
+\large
+UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL \linebreak
+ESCOLA DE ENGENHARIA\linebreak
+PROGRAMA DE PÓS-GRADUAÇÃO EM ENGENHARIA DE MINAS, METALÚRGICA E DE MATERIAIS
+\end{center}
+% \RaggedLeft
+\raggedright
+\vspace*{\baselineskip} %linha em branco
+\textbf{\imprimirtitulo}
+\vspace*{2\baselineskip} %linha em branco
+\newtcolorbox{lmarginbox}{
+  blanker, breakable, left=.5em,top=3pt,bottom=3pt,
+  borderline west={3pt}{0pt}{black}} %MARGEM LATERAL
+
+\newcommand{\email}{scholzegustavo@gmail.com}
+\begin{lmarginbox}
+\normalsize
+\textbf{\imprimirautor}\\
+\href{mailto:\email}{\email}
+
+\vspace*{\baselineskip} %linha em branco
+\textbf{\textit{Resumo.}} <\lipsum[1]> 
+
+\vspace*{\baselineskip} %linha em branco
+\textbf{\textit{Palavras-Chave:}}
+<Tag 1, Tag 2, Tag 3, Tag 4>
+
+\vspace*{\baselineskip} %linha em branco
+\textbf{\textit{Abstract.}} \textit{<\lipsum[1]>}
+
+\vspace*{\baselineskip} %linha em branco
+\textbf{\textit{Keywords:}} <Tag 1, Tag 2, Tag 3, Tag 4>
+
+\end{lmarginbox}
